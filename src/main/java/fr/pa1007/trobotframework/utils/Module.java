@@ -32,4 +32,8 @@ public abstract class Module implements ModuleLoadedListener {
     public void setAppJson(String appJson) {
         this.appJson = appJson;
     }
+
+    public ModuleInfo getInfo() {
+        return infos;
+    }
 }
