@@ -25,15 +25,23 @@ public abstract class Module implements ModuleLoadedListener {
         this.infos = infos;
     }
 
+    public ModuleInfo getInfo() {
+        return infos;
+    }
+
+    public Logger getLogger() {
+        return logger;
+    }
+
     public void setLogger(Logger logger) {
         this.logger = logger;
     }
 
-    public void setAppJson(String appJson) {
-        this.appJson = appJson;
+    public String getAppJson() {
+        return appJson;
     }
 
-    public ModuleInfo getInfo() {
-        return infos;
+    public void setAppJson(String appJson) {
+        this.appJson = appJson;
     }
 }
