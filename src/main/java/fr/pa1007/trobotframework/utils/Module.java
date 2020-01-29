@@ -1,5 +1,6 @@
 package fr.pa1007.trobotframework.utils;
 
+import fr.pa1007.trobotframework.event.ApplicationSelectedEvent;
 import fr.pa1007.trobotframework.info.ModuleInfo;
 import fr.pa1007.trobotframework.listener.ModuleLoadedListener;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +21,8 @@ public abstract class Module implements ModuleLoadedListener {
      * The json sent to the app
      */
     protected String appJson;
+
+    public abstract void appSelected(ApplicationSelectedEvent e);
 
     public void setInfos(ModuleInfo infos) {
         this.infos = infos;

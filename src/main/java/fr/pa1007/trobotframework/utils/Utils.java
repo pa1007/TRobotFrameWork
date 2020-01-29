@@ -17,7 +17,7 @@ public class Utils {
 
     public static Logger getLogger() {
         if (logger == null) {
-            logger = LogManager.getLogger("T-Robot-Framework");
+            logger = LogManager.getLogger("T-Robot");
         }
         return logger;
     }

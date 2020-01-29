@@ -40,7 +40,7 @@ public class Loader extends Thread {
      * {@code "Thread-"+}<i>n</i>, where <i>n</i> is an integer.
      */
     public Loader() {
-        log = LogManager.getLogger("T-ROBOT");
+        log = Utils.getLogger();
     }
 
     @Override

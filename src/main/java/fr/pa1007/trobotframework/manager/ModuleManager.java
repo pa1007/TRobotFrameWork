@@ -15,6 +15,10 @@ public class ModuleManager {
 
     private static List<String> appsInfo = new ArrayList<>();
 
+    public static List<Module> getModules() {
+        return new ArrayList<>(registeredModule.keySet());
+    }
+
     public static void registerModule(Module module, ModuleInfo info) {
         logger.trace("Loading ... module");
 
@@ -103,7 +107,7 @@ public class ModuleManager {
      *
      * @return
      */
-    public static String generateJSONApp() {
+    public synchronized static String generateJSONApp() {
         StringBuilder sb = new StringBuilder();
         sb.append("{\"Module\":{\"name\":\"RaspConnector\",\"usedPage\":[");
         for (int i = 0; i < appsInfo.size(); i++) {
@@ -116,5 +120,4 @@ public class ModuleManager {
         sb.append("]}}");
         return sb.toString();
     }
-
 }
