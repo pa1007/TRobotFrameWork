@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import fr.pa1007.trobotframework.event.ModuleLoadedEvent;
 import fr.pa1007.trobotframework.info.ModuleInfo;
 import fr.pa1007.trobotframework.manager.EventManager;
+import fr.pa1007.trobotframework.manager.ModuleManager;
 import fr.pa1007.trobotframework.utils.Module;
 import fr.pa1007.trobotframework.utils.Utils;
 import org.apache.logging.log4j.Level;
@@ -104,7 +105,7 @@ public class Loader extends Thread {
                         mod.setInfos(moduleInfo);
                         mod.setLogger(LogManager.getLogger(moduleInfo.getName()));
                         mod.setAppJson(json);
-                        // todo register to robot
+                        ModuleManager.registerModule(mod, moduleInfo);
                     }
                     catch (IOException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                         log.error("There is an error while loading the jar " + path, e);
