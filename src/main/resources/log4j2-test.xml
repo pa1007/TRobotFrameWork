@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="T-Robot" packages="fr.pa1007.trobotframework">
+    <Appenders>
+        <File name="RaspConnectorLogFileALL" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [Thread: %t] [%c][%M] %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+        <Console name="ConsoleRed" target="SYSTEM_ERR">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+        <Async name="ASYNC">
+            <AppenderRef ref="RaspConnectorLogFileALL"/>
+            <AppenderRef ref="Console"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Logger name="errorLogger">
+            <AppenderRef ref="ConsoleRed"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="ASYNC"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
