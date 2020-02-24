@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Connexion {
 
-    private static final int    PORT = 8000;
+    private static final int    PORT = 5565;
     private static       Logger logger;
 
     public static void main(String[] args) {

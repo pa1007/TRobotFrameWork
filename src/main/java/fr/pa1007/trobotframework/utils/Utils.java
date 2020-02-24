@@ -32,4 +32,13 @@ public class Utils {
         }
     }
 
+    public static <E> E isJSONValid(String jsonInString, Class<E> object) {
+        try {
+            return (E) GSON.fromJson(jsonInString, object);
+        }
+        catch (JsonSyntaxException ex) {
+            return null;
+        }
+    }
+
 }

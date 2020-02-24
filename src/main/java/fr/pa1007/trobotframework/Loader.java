@@ -7,6 +7,7 @@ import fr.pa1007.trobotframework.manager.EventManager;
 import fr.pa1007.trobotframework.manager.ModuleManager;
 import fr.pa1007.trobotframework.utils.Module;
 import fr.pa1007.trobotframework.utils.Utils;
+import fr.pa1007.trobotframework.utils.json.App;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -88,10 +89,21 @@ public class Loader extends Thread {
                     while (bufferedReaderAPP.ready()) {
                         sb.append(bufferedReaderAPP.readLine());
                     }
-                    String json = sb.toString();
-                    if (!Utils.isJSONValid(json)) {
+                    String json      = sb.toString();
+                    App    jsonValid = Utils.isJSONValid(json, App.class);
+                    if (jsonValid == null) {
                         log.warn(String.format("Json from file %s in %s is not valid .", MOBILE_FILE, file));
                         return;
+                    }
+                    else {
+                        if (!jsonValid.getName().equals(moduleInfo.getName())) {
+                            log.error(String.format(
+                                    "The name from the app.json (%s) is not the same as the module (%s). \n Stopping loading !",
+                                    jsonValid.getName(),
+                                    moduleInfo.getName()
+                            ));
+                            return;
+                        }
                     }
 
                     log.trace(String.format("Loading complete of %s now loading .jar .....", MOBILE_FILE));
