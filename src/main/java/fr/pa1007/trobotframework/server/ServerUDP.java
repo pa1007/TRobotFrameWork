@@ -25,7 +25,7 @@ public class ServerUDP {
         byte[]         buffer         = new byte[500];
         DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
         socket.receive(datagramPacket);
-        return new String(buffer);
+        return new String(buffer,0,buffer.length);
     }
 
     public void send(String msg) throws IOException {

@@ -37,6 +37,7 @@ getinfot() {
 
 getinfot TRobotFrameWork
 getinfot ModuleMouvement
+getinfot ModuleGyroscopique
 wait 12
 echo "Excecution du frawework $jar"
 sudo java -jar "$jar"
