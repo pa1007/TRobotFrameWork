@@ -6,9 +6,9 @@ import java.io.IOException;
 
 public abstract class Servo {
 
-    public static final int                  MIN_ANGLE      = 0;
-    public static final int                  MAX_ANGLE      = 70;
-    public static final int                  STRAIGHT_ANGLE = 50;
+    public static final int                  MIN_ANGLE      = 22;
+    public static final int                  MAX_ANGLE      = 33;
+    public static final int                  STRAIGHT_ANGLE = 25;
     protected           PWMDevice            pwmDevice;
     protected           PWMDevice.PWMChannel channel;
     protected           int                  angle;
@@ -33,8 +33,7 @@ public abstract class Servo {
             angle = MIN_ANGLE;
         }
         this.angle = angle;
-        int r = angle * 1800 / 180 + 600 / 1000000 * 60 * 4096;
-        instance.getLogger().debug(r);
+        int r = angle * 10;
         try {
             channel.setPWM(0, r);
         }
