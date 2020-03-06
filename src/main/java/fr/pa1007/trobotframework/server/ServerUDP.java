@@ -35,7 +35,7 @@ public class ServerUDP {
         socket.send(datagramPacket);
     }
 
-    public static ServerUDP getInstance() throws SocketException {
+    public static synchronized ServerUDP getInstance() throws SocketException {
         if (instance == null) {
             instance = new ServerUDP();
         }

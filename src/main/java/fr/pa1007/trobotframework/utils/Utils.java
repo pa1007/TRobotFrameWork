@@ -25,7 +25,7 @@ public class Utils {
         return logger;
     }
 
-    public static GpioController getProvider() {
+    public static synchronized GpioController getProvider() {
         if (provider == null) {
             provider = GpioFactory.getInstance();
         }
