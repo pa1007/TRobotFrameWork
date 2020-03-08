@@ -5,6 +5,7 @@ import fr.pa1007.trobotframework.event.ModuleLoadedEvent;
 import fr.pa1007.trobotframework.info.ModuleInfo;
 import fr.pa1007.trobotframework.manager.EventManager;
 import fr.pa1007.trobotframework.manager.ModuleManager;
+import fr.pa1007.trobotframework.server.ServerUDP;
 import fr.pa1007.trobotframework.utils.Module;
 import fr.pa1007.trobotframework.utils.Utils;
 import fr.pa1007.trobotframework.utils.json.App;
@@ -116,7 +117,13 @@ public class Loader extends Thread {
                         EventManager.addListener(ModuleLoadedEvent.class, mod);
                         mod.setInfos(moduleInfo);
                         mod.setLogger(LogManager.getLogger(moduleInfo.getName()));
+                        while (json.startsWith("{")) {
+                            json = json.substring(1);
+                        }
+                        int port = ServerUDP.getPort();
+                        json = "{ \"port\":\"" + port + "\", " + json;
                         mod.setAppJson(json);
+                        mod.setPort(port);
                         ModuleManager.registerModule(mod, moduleInfo);
                     }
                     catch (IOException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {

@@ -22,6 +22,11 @@ public abstract class Module implements ModuleLoadedListener {
      */
     protected String appJson;
 
+    /**
+     * The port for UDP communication
+     */
+    protected int port;
+
     public abstract void appSelected(ApplicationSelectedEvent e);
 
     public void setInfos(ModuleInfo infos) {
@@ -46,5 +51,13 @@ public abstract class Module implements ModuleLoadedListener {
 
     public void setAppJson(String appJson) {
         this.appJson = appJson;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }
