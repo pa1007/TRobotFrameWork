@@ -7,13 +7,13 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerTCP{
+public class ServerTCP {
 
-    private int port;
-    private ServerSocket serverSocket;
-    private Socket client;
+    private int            port;
+    private ServerSocket   serverSocket;
+    private Socket         client;
     private BufferedReader enter;
-    private PrintWriter exit;
+    private PrintWriter    exit;
 
     public ServerTCP(int s) throws IOException {
         this.port = s;
@@ -30,12 +30,20 @@ public class ServerTCP{
         return this.enter.readLine();
     }
 
-    public void sendMessage(String s){
+    public void sendMessage(String s) {
         this.exit.println(s);
         this.exit.flush();
     }
 
     public void endConnection() throws IOException {
         this.serverSocket.close();
+    }
+
+    public boolean isOpen() {
+        return client.isConnected();
+    }
+
+    public void stopCurrent() throws IOException {
+        client.close();
     }
 }

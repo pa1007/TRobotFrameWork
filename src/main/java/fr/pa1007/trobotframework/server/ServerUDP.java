@@ -1,12 +1,12 @@
 package fr.pa1007.trobotframework.server;
 
 import fr.pa1007.trobotframework.utils.Module;
+import fr.pa1007.trobotframework.utils.Utils;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ServerUDP {
@@ -43,6 +43,7 @@ public class ServerUDP {
     }
 
     public static synchronized ServerUDP getInstance(Module m) throws SocketException {
+        Utils.getLogger().info("Creating a server for module " + m.getInfo().getName() + " et the port " + m.getPort());
         return new ServerUDP(m);
     }
 }

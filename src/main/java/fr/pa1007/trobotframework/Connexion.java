@@ -30,19 +30,29 @@ public class Connexion {
                 tcp.sendMessage(ModuleManager.generateJSONApp());
 
                 while (true) {
-                    String s = tcp.waitMessage();
-                    try {
-                        Module module =
-                                ModuleManager.getModules().stream().filter(mod -> mod.getInfo().getName().equals(s)).findFirst().orElseThrow(
-                                        ModuleNotFoundException::new);
-                        new Thread(() -> module.appSelected(new ApplicationSelectedEvent(
-                                "Selected Server",
-                                null,
-                                module
-                        ))).start();
+                    if (tcp.isOpen()) {
+                        String s = tcp.waitMessage();
+                        if (s == null){
+                            tcp.stopCurrent();
+                        }
+                        try {
+                            Module module =
+                                    ModuleManager.getModules().stream().filter(mod -> mod.getInfo().getName().equals(s)).findFirst().orElseThrow(
+                                            ModuleNotFoundException::new);
+                            new Thread(() -> module.appSelected(new ApplicationSelectedEvent(
+                                    "Selected Server",
+                                    null,
+                                    module
+                            ))).start();
+                        }
+                        catch (ModuleNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    catch (ModuleNotFoundException e) {
-                        e.printStackTrace();
+                    else {
+                        tcp.startConnection();
+                        tcp.waitMessage();
+                        tcp.sendMessage(ModuleManager.generateJSONApp());
                     }
                 }
             }
